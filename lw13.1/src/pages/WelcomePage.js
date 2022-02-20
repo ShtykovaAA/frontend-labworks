@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import classes from "../components/Pages.module.css";
 import { useState } from "react";
 
 function WelcomePage() {
@@ -9,7 +10,7 @@ function WelcomePage() {
   }
 
   return (
-    <div>
+    <div className={classes.main}>
       <Link to="/test" onClick={openTest}>
         Тестирование по реакту
       </Link>

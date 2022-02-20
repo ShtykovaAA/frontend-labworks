@@ -1,74 +1,163 @@
 import classes from "./MainTestForm.module.css";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
+import Select from "react-select";
+
+function getFormValues() {
+  const storedValues = localStorage.getItem("form");
+  if (!storedValues) {
+    return {
+      question1: "",
+      question2: "",
+      question3: "",
+      question4: "",
+      question5: "",
+      question6: "",
+      question7: "",
+      question8: "",
+    };
+  }
+  return JSON.parse(storedValues);
+}
 
 function MainTestForm() {
-  const question1 = useRef();
-  const question2 = useRef();
-  const question3 = useRef();
-  const question4 = useRef();
-  const question5 = useRef();
+  const [formValues, setValues] = useState(getFormValues);
+  useEffect(() => {
+    localStorage.setItem("form", JSON.stringify(formValues));
+  }, [formValues]);
 
   function submitHandler(event) {
     event.preventDefault();
-    const enteredQuestion1 = question1.current.value;
-    const enteredQuestion2 = question1.current.value;
-    const enteredQuestion3 = question1.current.value;
-    const enteredQuestion4 = question1.current.value;
-    const enteredQuestion5 = question1.current.value;
-
-    const answers = {
-      enteredQuestion1,
-      enteredQuestion2,
-      enteredQuestion3,
-      enteredQuestion4,
-      enteredQuestion5,
-    };
-    console.log(answers);
+    alert(JSON.stringify(formValues));
   }
 
+  function handleChange(event) {
+    setValues((previousValues) => ({
+      ...previousValues,
+      [event.target.name]: event.target.value,
+    }));
+  }
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
-        <label htmlFor="component">Что такое компонент?</label>
-        <input type="text" required id="component" ref={question1} />
+        <label htmlFor="question1">1. Что такое компонент?</label>
+        <input
+          type="text"
+          name="question1"
+          required
+          id="question1"
+          onChange={handleChange}
+          value={formValues.question1}
+        />
       </div>
       <div className={classes.control}>
-        <label htmlFor="docs">Скиньте ссылку на документацию react</label>
-        <input type="url" required id="docs" ref={question2} />
+        <label htmlFor="">2. Почему стоит изучать react?</label>
+        <select
+          name="question2"
+          onChange={handleChange}
+          value={formValues.question2}
+        >
+          <option value="fashion">Это модно</option>
+          <option value="jsx">Из-за JSX и документации</option>
+        </select>
       </div>
       <div className={classes.control}>
-        <label htmlFor="description">
-          Расскажите, на какие компоненты вы бы разделили главную страницу ВК
+        <label htmlFor="question3">
+          3. Скиньте ссылку на документацию react
         </label>
-        <textarea type="text" required id="description" rows="5" />
+        <input
+          type="url"
+          name="question3"
+          required
+          id="question3"
+          onChange={handleChange}
+          value={formValues.question3}
+        />
       </div>
       <div className={classes.control}>
-        <label htmlFor="description">
-          Функции, с помощью которых можно "подцепитсья" к состоянию и методам
-          жизненного цикла React из функциональных компонентов называются
+        <label htmlFor="question4">
+          4. Расскажите, на какие компоненты вы бы разделили главную страницу ВК
         </label>
-        <select>
-          <option selected value="props">
-            Пропсы
-          </option>
+        <textarea
+          type="text"
+          name="question4"
+          required
+          id="question4"
+          rows="5"
+          onChange={handleChange}
+          value={formValues.question4}
+        />
+      </div>
+      <div className={classes.control}>
+        <label htmlFor="question5">
+          5. Функции, с помощью которых можно "подцепитсья" к состоянию и
+          методам жизненного цикла React из функциональных компонентов
+          называются
+        </label>
+        <select
+          name="question5"
+          onChange={handleChange}
+          value={formValues.question5}
+        >
+          <option value="props">Пропсы</option>
           <option value="hook">Хуки</option>
           <option value="wood">Деревья</option>
         </select>
       </div>
       <div className={classes.control_checkbox}>
-        <label htmlFor="hooks">useEffect нужен для того, чтобы...</label>
-        <div>
-          <input type="checkbox" id="hooks" name="useState" value="yes" />
+        <label htmlFor="hooks">6. useEffect нужен для того, чтобы...</label>
+        <div
+          name="question6"
+          onChange={handleChange}
+          value={formValues.question6}
+        >
+          <input
+            type="checkbox"
+            id="useState"
+            value="useState"
+            name="useState"
+          />
           добавлять состояние react к компонентам-функциям
           <br></br>
-          <input type="checkbox" id="hooks" name="useRef" value="yes" />
+          <input type="checkbox" id="useRef" value="useRef" name="useRef" />
           для работы с дочерними элементами
           <br></br>
-          <input type="checkbox" id="hooks" name="useEffect" value="yes" />
+          <input
+            type="checkbox"
+            id="useEffect"
+            value="useEffect"
+            name="useEffect"
+          />
           использовать таймер
+          <br></br>
+          <br></br>
         </div>
       </div>
-
+      <div className={classes.control}>
+        <label htmlFor="question7">
+          7. Объясните, почему фронтэнд разработчики используют TypeScript
+        </label>
+        <textarea
+          type="text"
+          name="question7"
+          required
+          id="question7"
+          rows="5"
+          onChange={handleChange}
+          value={formValues.question7}
+        />
+      </div>
+      <div className={classes.control}>
+        <label htmlFor="question8">8. Это просто радиокнопка</label>
+        <div
+          name="question8"
+          onChange={handleChange}
+          value={formValues.question8}
+        >
+          <input type="radiobox" value="выбери меня" name="me" />
+          <input type="radiobox" id="noMe" value="нет, меня" name="noMe" />
+          <input type="radiobox" id="why" value="почему не меня?" name="why" />
+        </div>
+      </div>
       <div className={classes.actions}>
         <button>Отправить</button>
       </div>

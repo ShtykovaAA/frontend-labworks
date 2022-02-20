@@ -7,7 +7,7 @@ function TestPage() {
   return (
     <div>
       <div className={classes.timer}>
-        <Timer countdownTimestampMs={dayjs().add(1, "m").valueOf()} />
+        <Timer countdownTimestampMs={dayjs().add(5, "m").valueOf()} />
       </div>
       <div className={classes.main}>
         <h2 className={classes.header}>Тестирование</h2>

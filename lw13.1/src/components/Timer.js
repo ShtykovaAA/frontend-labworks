@@ -14,7 +14,10 @@ function Timer({ countdownTimestampMs }) {
     const intervalId = setInterval(() => {
       updateRemainingTime(countdownTimestampMs);
     }, 1000);
-    return () => clearInterval(intervalId);
+    return () => {
+      alert("Время закончилось!!!!");
+      clearInterval(intervalId);
+    };
   }, [countdownTimestampMs]);
 
   function updateRemainingTime(countdown) {
