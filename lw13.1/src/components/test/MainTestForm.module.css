@@ -1,22 +1,25 @@
 .form {
   padding: 1rem;
-  width: 60%;
-  display: inline-block;
-  text-align: left;
+  width: 100%;
+  /* display: inline-block; */
 }
 
 .control {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.control label {
+.control label,
+.control_checkbox label {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-
+.control_checkbox input {
+  font: inherit;
+}
 .control input,
-.control textarea {
+.control textarea,
+.control select {
   display: block;
   font: inherit;
   border-radius: 4px;
@@ -29,7 +32,6 @@
   margin-top: 1rem;
   text-align: right;
 }
-
 .actions button {
   font: inherit;
   cursor: pointer;
@@ -43,6 +45,6 @@
 
 .actions button:hover,
 .actions button:active {
-  background-color: #5d4686;
-  border-color: #5d4686;
+  background-color: rgb(187, 165, 202);
+  border-color: rgb(187, 165, 202);
 }

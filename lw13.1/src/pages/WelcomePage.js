@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
-import classes from "../components/Pages.module.css";
+import { useState } from "react";
 
 function WelcomePage() {
+  const [testIsOpen, setTestOpen] = useState(false);
+
+  function openTest() {
+    setTestOpen(true);
+  }
+
   return (
-    <div className={classes.main}>
-      <div className={classes.navigator}>
-        <h2 className={classes.linktitle}>Содержание</h2>
-        <Link to="/test">Тестирование</Link>
-      </div>
+    <div>
+      <Link to="/test" onClick={openTest}>
+        Тестирование по реакту
+      </Link>
     </div>
   );
 }
