@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { getRemainingTimeUntilMs } from "./Utils/TimerUtiols";
+import { useEffect, useState } from "react";
+import { getRemainingTimeUntilMs } from "./Utils/TimerUtils";
 
 const defaultTime = {
   hours: "00",
@@ -29,7 +29,6 @@ function Timer({ countdownTimestampMs }) {
       <div>
         {remainingTime.hours}:{remainingTime.minutes}:{remainingTime.seconds}
       </div>
-      <div></div>
     </div>
   );
 }

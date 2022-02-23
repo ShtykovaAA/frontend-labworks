@@ -14,9 +14,17 @@
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-.control_checkbox input {
+.control_checkbox input,
+.control_radiobox input{
   font: inherit;
 }
+.control_radiobox {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+
 .control input,
 .control textarea,
 .control select {

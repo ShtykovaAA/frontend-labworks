@@ -1,6 +1,8 @@
 import classes from "./MainTestForm.module.css";
-import { useEffect, useState } from "react";
-import Select from "react-select";
+import {useEffect, useState} from "react";
+
+
+var _ = require('lodash');
 
 function getFormValues() {
   const storedValues = localStorage.getItem("form");
@@ -11,7 +13,11 @@ function getFormValues() {
       question3: "",
       question4: "",
       question5: "",
-      question6: "",
+      question6: {
+        useState: false,
+        useRef: false,
+        useEffect: false
+      },
       question7: "",
       question8: "",
     };
@@ -31,11 +37,23 @@ function MainTestForm() {
   }
 
   function handleChange(event) {
-    setValues((previousValues) => ({
-      ...previousValues,
-      [event.target.name]: event.target.value,
-    }));
+    console.log('event', event)
+    console.log('event.target.value', event.target)
+    setValues((previousValues) => {
+      const checked = _.get(event, 'target.checked', null)
+      const value = event.target.type !== 'checkbox'
+        ? event.target.value
+        : {
+          ...previousValues[event.target.name],
+          [event.target.value]: checked
+        }
+      return ({
+        ...previousValues,
+        [event.target.name]: value
+      });
+    });
   }
+
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
@@ -105,32 +123,28 @@ function MainTestForm() {
       </div>
       <div className={classes.control_checkbox}>
         <label htmlFor="hooks">6. useEffect нужен для того, чтобы...</label>
-        <div
-          name="question6"
-          onChange={handleChange}
-          value={formValues.question6}
-        >
           <input
             type="checkbox"
             id="useState"
             value="useState"
-            name="useState"
+            name="question6"
+            onChange={handleChange}
           />
           добавлять состояние react к компонентам-функциям
           <br></br>
-          <input type="checkbox" id="useRef" value="useRef" name="useRef" />
+          <input type="checkbox" id="useRef" value="useRef" name="question6" onChange={handleChange}/>
           для работы с дочерними элементами
           <br></br>
           <input
             type="checkbox"
             id="useEffect"
             value="useEffect"
-            name="useEffect"
+            name="question6"
+            onChange={handleChange}
           />
           использовать таймер
           <br></br>
           <br></br>
-        </div>
       </div>
       <div className={classes.control}>
         <label htmlFor="question7">
@@ -146,16 +160,22 @@ function MainTestForm() {
           value={formValues.question7}
         />
       </div>
-      <div className={classes.control}>
+      <div className={classes.control_radiobox}>
         <label htmlFor="question8">8. Это просто радиокнопка</label>
-        <div
-          name="question8"
-          onChange={handleChange}
-          value={formValues.question8}
-        >
-          <input type="radiobox" value="выбери меня" name="me" />
-          <input type="radiobox" id="noMe" value="нет, меня" name="noMe" />
-          <input type="radiobox" id="why" value="почему не меня?" name="why" />
+        <div>
+          <input type="radio" id="me" value="me" name="question8"
+                 onChange={handleChange}/>
+          <label>выбери меня</label>
+        </div>
+        <div>
+          <input type="radio" id="noMe" value="noMe" name="question8"
+                 onChange={handleChange}/>
+          <label>нет, меня</label>
+        </div>
+        <div>
+          <input type="radio" id="why" value="why" name="question8"
+                 onChange={handleChange}/>
+          <label>почему не меня?</label>
         </div>
       </div>
       <div className={classes.actions}>
@@ -164,4 +184,5 @@ function MainTestForm() {
     </form>
   );
 }
+
 export default MainTestForm;
