@@ -1,19 +1,25 @@
-import { Link } from "react-router-dom";
 import classes from "../components/Pages.module.css";
-import { useState } from "react";
+import { MenuForm } from "../components/layout/MenuForm";
+import Clock from "../components/Lab10/Clock";
 
 function WelcomePage() {
-  const [testIsOpen, setTestOpen] = useState(false);
-
-  function openTest() {
-    setTestOpen(true);
-  }
-
   return (
     <div className={classes.main}>
-      <Link to="/test" onClick={openTest}>
-        Тестирование по реакту
-      </Link>
+      <div className={classes.rightSide}>
+        <div>
+          Текущая дата
+          <br/>
+          {new Date().toLocaleDateString()}
+        </div>
+        <div>
+          Текущее время
+          <Clock/>
+        </div>
+        {/*<h2> Здесь какой-то заголовок.</h2>*/}
+      </div>
+      <div className={classes.menu}>
+        <MenuForm/>
+      </div>
     </div>
   );
 }

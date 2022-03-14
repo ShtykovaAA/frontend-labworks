@@ -1,0 +1,16 @@
+.resume{
+    width: 60%;
+    margin: auto;
+}
+
+.resume Input{
+    margin-bottom: 15px;
+}
+.resume h3,
+.radio{
+    text-align: left;
+}
+
+.btn{
+    text-align: right;
+}

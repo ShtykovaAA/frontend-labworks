@@ -7,21 +7,31 @@ const defaultTime = {
   seconds: "00",
 };
 
-function Timer({ countdownTimestampMs }) {
+function Timer({ countdownTimestampMs, isWorking }) {
   const [remainingTime, setRemainingTime] = useState(defaultTime);
+  let active = true
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      updateRemainingTime(countdownTimestampMs);
+      // console.log('isWorking', isWorking)
+      // console.log('active', active)
+      // console.log('both', active && isWorking)
+      if (active && isWorking){
+        active = updateRemainingTime(countdownTimestampMs);
+      }
+      else{
+        setRemainingTime(defaultTime)
+        alert("Тестирование окончено");
+        clearInterval(intervalId);
+      }
     }, 1000);
-    return () => {
-      alert("Время закончилось!!!!");
-      clearInterval(intervalId);
-    };
-  }, [countdownTimestampMs]);
+    return () => clearInterval(intervalId)
+  }, [countdownTimestampMs, active, isWorking]);
 
   function updateRemainingTime(countdown) {
-    setRemainingTime(getRemainingTimeUntilMs(countdown));
+    const countDown = getRemainingTimeUntilMs(countdown)
+    setRemainingTime(countDown.time);
+    return countDown.active
   }
 
   return (

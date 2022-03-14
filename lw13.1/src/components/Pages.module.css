@@ -1,18 +1,32 @@
 .main {
   width: 60%;
   margin: auto;
-
+  display: flex;
+  flex-direction:row-reverse;
   /* border: 1px;
   border: 2px dotted;
   border: medium dashed green; */
 }
+.rightSide{
+  flex: 3;
+  /*border: 1px;*/
+  /*border: 2px dotted;*/
+  /*border: medium dashed green;*/
+}
 
+.menu{
+  flex: 1;
+  /*border: 1px;*/
+  /*border: 2px dotted;*/
+  /*border: medium dashed green;*/
+}
 .header {
   text-align: center;
 }
 
 .body {
   text-align: left;
+  color: #223146;
 }
 .timer {
   position: sticky;

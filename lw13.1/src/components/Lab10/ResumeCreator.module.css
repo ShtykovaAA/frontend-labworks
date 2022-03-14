@@ -1,0 +1,12 @@
+.text{
+    margin: auto auto 10px;
+    padding-left: 15%;
+    text-align: left;
+
+}
+
+.mainBlock{
+    height: 1000px;
+    width: 60%;
+    margin: auto;
+}
